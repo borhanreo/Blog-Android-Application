@@ -25,29 +25,5 @@ public class ProjectConstant {
     public static String BUNDLE_KEY_CATEORY="category";
     public static String BUNDLE_KEY_AUTHOR="author";
     public static String BASE_URL="https://my-json-server.typicode.com/";
-    private static ApiService apiService;
-    public static ApiService getApiService(){
-        if(apiService == null){
-            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-            OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-            httpClient.connectTimeout(5, TimeUnit.MINUTES);
-            httpClient.readTimeout(5, TimeUnit.MINUTES);
-            httpClient.addInterceptor(logging);
-            /*httpClient.addInterceptor(new HeaderInterceptor());
-            httpClient.addInterceptor(provideOfflineCacheInterceptor());
-            httpClient.addInterceptor(provideCacheInterceptor());
-            httpClient.cache(provideCache());*/
-            apiService = new Retrofit
-                    .Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .client(httpClient.build())
-                    .build()
-                    .create(ApiService.class);
-        }
-        return apiService;
-    }
-
 
 }
